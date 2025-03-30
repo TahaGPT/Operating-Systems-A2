@@ -15,17 +15,17 @@ struct Player {
     double current_form;
 };
 
-
+// SJF for batting order (higher strike rate first)
 bool compareBatsmen(const Player &a, const Player &b) {
     return a.strike_rate > b.strike_rate;
 }
 
-
+// SJF for bowling order (lower economy rate first)
 bool compareBowlers(const Player &a, const Player &b) {
     return a.economy_rate < b.economy_rate;
 }
 
-
+// SRTF (considering current form dynamically)
 bool compareSRTF(const Player &a, const Player &b) {
     return a.current_form > b.current_form;
 }
@@ -34,7 +34,7 @@ vector<Player> readCSV(const string &filename) {
     vector<Player> players;
     ifstream file(filename);
     string line;
-    getline(file, line); 
+    getline(file, line); // Skip header
 
     while (getline(file, line)) {
         stringstream ss(line);
